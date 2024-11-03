@@ -26,8 +26,8 @@ function MainPage(props){
             <div style={{display: "flex", flexDirection: "column"}}>
                 <h1>Bill Management</h1>
 
-                <div className="buttons">
-                    <Button type="primary" onClick={onCreateButton} style={{}}>Create</Button>
+                <div className="buttons" style={{marginBottom: "15px"}}>
+                    <Button type="primary" onClick={onCreateButton} style={{float: "right"}}>Create</Button>
                 </div>
 
                 <BillList billInfoes ={billInfoes}/>
