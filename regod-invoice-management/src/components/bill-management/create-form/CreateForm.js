@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import './App.css'; // Đảm bảo rằng bạn đã nhập file CSS
 
 const { Title } = Typography;
 
@@ -16,21 +17,19 @@ const CreateForm = () => {
     console.log('Form cancelled');
   };
 
-  useEffect(() => {
-    const calculateTotal = () => {
-      const productList = form.getFieldValue('productList') || [];
-      const newTotal = productList.reduce((acc, product) => {
-        const count = product.count || 0;
-        const price = product.price || 0;
-        return acc + (count * price);
-      }, 0);
-      setTotal(newTotal);
-    };
+  const calculateTotal = () => {
+    const productList = form.getFieldValue('productList') || [];
+    const newTotal = productList.reduce((acc, product) => {
+      const count = product?.count || 0;
+      const price = product?.price || 0;
+      return acc + (count * price);
+    }, 0);
+    setTotal(newTotal);
+  };
 
-    form.setFieldsValue({ total });
-    form.getFieldsValue(['productList']);
-    form.validateFields(['productList']).then(calculateTotal).catch(() => {});
-  }, [form, total]);
+  useEffect(() => {
+    calculateTotal();
+  }, [form]);
 
   return (
     <ConfigProvider
@@ -55,6 +54,14 @@ const CreateForm = () => {
             name="billname"
             label={<span style={{ fontWeight: 'bold' }}>Bill Name</span>}
             rules={[{ required: true, message: 'Please input the bill name!' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="departmentName"
+            label={<span style={{ fontWeight: 'bold' }}>Department Name</span>}
+            rules={[{ required: true, message: 'Please input the department name!' }]}
           >
             <Input />
           </Form.Item>
@@ -96,7 +103,7 @@ const CreateForm = () => {
                         label={<span style={{ fontWeight: 'bold' }}>Count</span>}
                         rules={[{ required: true, message: 'Please input the count!' }]}
                       >
-                        <Input placeholder="Count" type="number" />
+                        <Input placeholder="Count" type="number" onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={6}>
@@ -107,18 +114,18 @@ const CreateForm = () => {
                         label={<span style={{ fontWeight: 'bold' }}>Price</span>}
                         rules={[{ required: true, message: 'Please input the price!' }]}
                       >
-                        <Input placeholder="Price" type="number" />
+                        <Input placeholder="Price" type="number" onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={4}>
-                      <MinusCircleOutlined onClick={() => remove(name)} style={{ color: '#ff4d4f', fontSize: '20px', marginTop: '40px' }} />
+                      <MinusCircleOutlined onClick={() => { remove(name); calculateTotal(); }} style={{ color: '#ff4d4f', fontSize: '20px', marginTop: '40px' }} />
                     </Col>
                   </Row>
                 ))}
                 <Form.Item>
                   <Button
                     type="dashed"
-                    onClick={() => add()}
+                    onClick={() => { add(); calculateTotal(); }}
                     block
                     icon={<PlusOutlined />}
                     style={{ borderColor: '#1677FF', color: '#1677FF' }}
