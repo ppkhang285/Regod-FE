@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import './App.css'; // Đảm bảo rằng bạn đã nhập file CSS
+    
 
 const { Title } = Typography;
 
