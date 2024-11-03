@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider } from 'antd';
+import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider, Upload } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
     
 
@@ -12,6 +12,11 @@ const CreateForm = () => {
   const onFinish = (values) => {
     console.log('Received values of form:', values);
   };
+
+  const onUploadChange = ({ fileList }) => {
+    console.log('File list:', fileList);
+  };
+
 
   const onCancel = () => {
     console.log('Form cancelled');
@@ -39,7 +44,7 @@ const CreateForm = () => {
         },
       }}
     >
-      <div style={{ maxWidth: '800px', maxHeight: '1059px', margin: '0 auto', padding: '20px', backgroundColor: '#f0f2f5', borderRadius: '8px', height: 'auto' }}>
+      <div style={{ maxWidth: '800px', maxHeight: '1059px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', height: 'auto' }}>
         <Title level={1} style={{ textAlign: 'center', color: '#1677FF' }}>Create New Bill!</Title>
         <Form form={form} name="create_form" onFinish={onFinish} autoComplete="off" layout="vertical" requiredMark={false}>
           <Form.Item
@@ -141,7 +146,19 @@ const CreateForm = () => {
             <Input value={total} readOnly />
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item label="Upload Image">
+            <Upload
+              listType="picture-card"
+              onChange={onUploadChange}
+            >
+              <div>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </div>
+            </Upload>
+          </Form.Item>
+
+          {/* <Form.Item>
             <Row justify="end" gutter={16}>
               <Col>
                 <Button size="large" onClick={onCancel} style={{ backgroundColor: '#ffffff', color: '#1677FF', borderColor: '#1677FF' }}>
@@ -154,7 +171,7 @@ const CreateForm = () => {
                 </Button>
               </Col>
             </Row>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </div>
     </ConfigProvider>
