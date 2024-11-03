@@ -13,6 +13,7 @@ function BillList(props){
                         <th>Bill Name</th>
                         <th>Total</th>
                         <th>Due Date</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>

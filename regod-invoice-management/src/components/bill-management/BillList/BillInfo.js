@@ -1,15 +1,20 @@
 
 
 function BillInfo(props){
+    let billInfoes = props.billInfoes;
+
     return (
-        <tr>
-            <td>1</td>
-            <td>Department Name</td>
-            <td>Bill Name</td>
-            <td>200.000 VND</td>
-            <td>03/11/2024</td>
-            <td>Action</td>
-        </tr>
+        billInfoes.map((billInfo, index) => (
+            <tr key={index}>
+                <td>{billInfo.no}</td>
+                <td>{billInfo.departmentName}</td>
+                <td>{billInfo.billName}</td>
+                <td>{billInfo.total} VND</td>
+                <td>{billInfo.dueDate}</td>
+                <td>1</td>
+            </tr>
+        ))
+            
     );
 }
 export default BillInfo;
