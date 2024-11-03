@@ -7,12 +7,13 @@ function MainPage(props){
 
     const [isOpen, setIsOpen] = useState(false)
 
-    let billInfoes =[
-        {id: 1, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 0},
-        {id: 2, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 1},
-        {id: 3, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 2}
-    ];
-
+    // let billInfoes =[
+    //     {id: 1, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 0},
+    //     {id: 2, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 1},
+    //     {id: 3, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 2}
+    // ];
+    let billInfoes = props.billInfoes;
+    console.log(billInfoes)
     const onCreateButton = () =>{
         
         setIsOpen(true)
