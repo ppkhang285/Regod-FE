@@ -18,14 +18,20 @@ const CreateForm = () => {
   };
 
   useEffect(() => {
-    const productList = form.getFieldValue('productList') || [];
-    const newTotal = productList.reduce((acc, product) => {
-      const count = product.count || 0;
-      const price = product.price || 0;
-      return acc + (count * price);
-    }, 0);
-    setTotal(newTotal);
-  }, [form]);
+    const calculateTotal = () => {
+      const productList = form.getFieldValue('productList') || [];
+      const newTotal = productList.reduce((acc, product) => {
+        const count = product.count || 0;
+        const price = product.price || 0;
+        return acc + (count * price);
+      }, 0);
+      setTotal(newTotal);
+    };
+
+    form.setFieldsValue({ total });
+    form.getFieldsValue(['productList']);
+    form.validateFields(['productList']).then(calculateTotal).catch(() => {});
+  }, [form, total]);
 
   return (
     <ConfigProvider
