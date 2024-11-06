@@ -7,6 +7,7 @@ function MainPage(props){
 
     const [isOpen, setIsOpen] = useState(false)
 
+    // Get data for Table
     // let billInfoes =[
     //     {id: 1, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 0},
     //     {id: 2, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 1},
@@ -14,7 +15,8 @@ function MainPage(props){
     // ];
     let billInfoes = props.billInfoes;
     console.log(billInfoes)
-    const onCreateButton = () =>{
+
+    const onFormOpen = () =>{
         
         setIsOpen(true)
     }
@@ -26,14 +28,13 @@ function MainPage(props){
         <div style={{paddingLeft: 50, paddingRight: 50}}>
             <div style={{display: "flex", flexDirection: "column"}}>
                 <h1>Bill Management</h1>
-
+                
                 <div className="buttons" style={{marginBottom: "15px"}}>
-                    <Button type="primary" onClick={onCreateButton} style={{float: "right"}}>Create</Button>
+                    <Button type="primary" onClick={onFormOpen} style={{float: "right"}}>Create</Button>
                 </div>
 
                 <BillList billInfoes ={billInfoes}/>
             </div>
-
             
             <Modal open={isOpen} onCancel={onFormClose} onClose={onFormClose}>
                 <CreateForm />
