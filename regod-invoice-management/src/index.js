@@ -7,15 +7,15 @@ import {
 
 import './index.css';
 import App from './routes/App';
-
+import BillMainPage from './components/bill-management/main-page/BillMainPage';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
   },
   {
-    path: "/hello",
-    element: <p>Hello</p>
+    path: "/bill",
+    element: <BillMainPage/>
   }
 ]);
 
