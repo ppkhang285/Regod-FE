@@ -3,7 +3,7 @@ import BillList from "../BillList/BillList";
 import { Button, Modal } from "antd";
 import CreateForm from "../create-form/CreateForm";
 
-function MainPage(props){
+function BillMainPage(props){
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -46,4 +46,4 @@ function MainPage(props){
 
 }
 
-export default MainPage;
+export default BillMainPage;
