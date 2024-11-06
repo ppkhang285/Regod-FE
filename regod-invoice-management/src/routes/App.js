@@ -20,9 +20,10 @@ function App(){
 
 
   return(
-    //<NavBar />
-  <BillMainPage billInfoes ={bills}/>
-
+  <div>
+    <NavBar />
+    <BillMainPage billInfoes ={bills}/>
+  </div>
   );
 }
 
