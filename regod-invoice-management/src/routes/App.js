@@ -21,9 +21,9 @@ function App(){
 
 
   return(
-    //<NavBar />
-   //<BillMainPage billInfoes ={bills}/>
+
     <InvoiceMainPage/>
+
   );
 }
 
