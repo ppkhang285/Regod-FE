@@ -1,11 +1,21 @@
-import BillInfo from "./BillInfo";
+import ActionButtons from "../../action-buttons/ActionButtons";
 import { Table, Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
-function BillList(props){
-    const billInfoes = props.billInfoes
+
+
+function BillTable(props){
+    const billList = props.billList
 
     const handleDelete = (id) =>{
+        console.log(id)
+    }
+
+    const handleEdit = (id) =>{
+        console.log(id)
+    }
+
+    const handleDetail = (id) =>{
         console.log(id)
     }
 
@@ -46,21 +56,27 @@ function BillList(props){
             }
         },
         {
-            title: 'No',
-            dataIndex: 'no',
+            title: 'Action',
+            dataIndex: 'action',
             key: 'id',
             render: (_, record) => <> 
-                <Button onClick={() =>handleDelete(record.id)} icon={<DeleteOutlined style={{ color: 'red' }}/>} type="link"/>
+                <ActionButtons 
+                    id = {record.id} 
+                    handleDelete ={handleDelete}
+                    handleDetail = {handleDetail}
+                    handleEdit = {handleEdit}
+
+                />
             </>
           },
       ];
       
       
     return(
-        <Table dataSource={billInfoes} columns={columns} pagination={false}/>
+        <Table dataSource={billList} columns={columns} pagination={false}/>
 
     );
 
 }
 
-export default BillList;
+export default BillTable;

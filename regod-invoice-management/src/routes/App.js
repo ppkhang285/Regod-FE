@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BillMainPage from '../components/bill-management/main-page/BillMainPage'
+import InvoiceMainPage from '../components/invoice-management/main-page/InvoiceMainPage';
 import NavBar from '../components/nav-bar/NavBar';
 function App(){
 
@@ -20,10 +21,9 @@ function App(){
 
 
   return(
-  <div>
-    <NavBar />
-    <BillMainPage billInfoes ={bills}/>
-  </div>
+
+    <InvoiceMainPage/>
+
   );
 }
 
