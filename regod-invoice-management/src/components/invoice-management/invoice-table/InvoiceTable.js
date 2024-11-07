@@ -1,11 +1,18 @@
-import BillInfo from "./BillInfo";
-import { Table, Button } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { Table } from "antd";
+import ActionButtons from "../../action-buttons/ActionButtons";
 
 function InvoiceTable(props){
-    const billInfoes = props.billInfoes
+    const invoiceList = props.invoiceList
 
     const handleDelete = (id) =>{
+        console.log(id)
+    }
+
+    const handleEdit = (id) =>{
+        console.log(id)
+    }
+
+    const handleDetail = (id) =>{
         console.log(id)
     }
 
@@ -16,48 +23,50 @@ function InvoiceTable(props){
           key: 'id',
         },
         {
-          title: 'Bill ID',
-          dataIndex: 'billId',
-          key: 'departmentName',
+          title: 'Invoice ID',
+          dataIndex: 'invoiceID',
+          key: 'invoiceID',
         },
         {
-          title: 'Bill Name',
-          dataIndex: 'total',
-          key: 'billName',
+          title: 'Bill ID',
+          dataIndex: 'billID',
+          key: 'billID',
+        },
+        {
+            title: 'Bill name',
+            dataIndex: 'billName',
+            key: 'billName'
         },
         {
             title: 'Total',
             dataIndex: 'total',
-            key: 'total'
+            key: 'total',
+            render: (_, record) => <> {record.total} VND </>
         },
         {
-            title: 'Due Date',
-            dataIndex: 'dueDate',
-            key: 'dueDate'
+            title: 'Paid date',
+            dataIndex: 'paidDate',
+            key: 'paidDate',
         },
         {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-            render: (_, record) =>{
-                if (record.status == 0) return (<p style={{color: "blue"}}>PENDING</p>)
-                if (record.status == 1) return (<p style={{color: "green"}}>PAID</p>)
-                if (record.status == 2) return (<p style={{color: "red"}}>OVERDUE</p>)
-            }
-        },
-        {
-            title: 'No',
-            dataIndex: 'no',
+            title: 'Action',
+            dataIndex: 'action',
             key: 'id',
             render: (_, record) => <> 
-                <Button onClick={() =>handleDelete(record.id)} icon={<DeleteOutlined style={{ color: 'red' }}/>} type="link"/>
+                <ActionButtons 
+                    id = {record.id} 
+                    handleDelete ={handleDelete}
+                    handleDetail = {handleDetail}
+                    handleEdit = {handleEdit}
+
+                />
             </>
           },
       ];
       
       
     return(
-        <Table dataSource={billInfoes} columns={columns} pagination={false}/>
+        <Table dataSource={invoiceList} columns={columns} pagination={false}/>
 
     );
 

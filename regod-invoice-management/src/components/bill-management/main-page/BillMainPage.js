@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BillList from "../BillList/BillList";
+import BillTable from "../bill-table/BillTable"
 import { Button, Modal } from "antd";
 import CreateForm from "../create-form/CreateForm";
 
@@ -8,13 +8,13 @@ function BillMainPage(props){
     const [isOpen, setIsOpen] = useState(false)
 
     // Get data for Table
-    // let billInfoes =[
-    //     {id: 1, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 0},
-    //     {id: 2, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 1},
-    //     {id: 3, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 2}
-    // ];
-    let billInfoes = props.billInfoes;
-    console.log(billInfoes)
+    let billList =[
+        {id: 1, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 0},
+        {id: 2, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 1},
+        {id: 3, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 2}
+    ];
+   // let billList = props.billList;
+    console.log(billList)
 
     const onFormOpen = () =>{
         
@@ -33,7 +33,7 @@ function BillMainPage(props){
                     <Button type="primary" onClick={onFormOpen} style={{float: "right"}}>Create</Button>
                 </div>
 
-                <BillList billInfoes ={billInfoes}/>
+                <BillTable billList ={billList}/>
             </div>
             
             <Modal open={isOpen} onCancel={onFormClose} onClose={onFormClose}>

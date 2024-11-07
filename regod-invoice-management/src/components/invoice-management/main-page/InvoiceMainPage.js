@@ -1,7 +1,7 @@
 import { useState } from "react";
-import BillList from "../BillList/BillList";
 import { Button, Modal } from "antd";
-import CreateForm from "../create-form/CreateForm";
+import InvoiceTable from '../invoice-table/InvoiceTable'
+
 
 function InvoiceMainPage(props){
 
@@ -9,9 +9,9 @@ function InvoiceMainPage(props){
 
     // Get data for Table
     let invoiceList =[
-        {id: 1, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 0, paidDate:"04/11/2024"},
-        {id: 2, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 1, paidDate:"04/11/2024"},
-        {id: 3, departmentName :"Department Name", billName: "Bill Name", total: "200.000 VND", dueDate :"03/11/2024", status: 2, paidDate:"04/11/2024"}
+        {id: 1, departmentName :"Department Name", billName: "Bill Name", total: 200000 , dueDate :"03/11/2024", status: 0, paidDate:"04/11/2024"},
+        {id: 2, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 1, paidDate:"04/11/2024"},
+        {id: 3, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 2, paidDate:"04/11/2024"}
     ];
     // let billInfoes = props.billInfoes;
     // console.log(billInfoes)
@@ -33,7 +33,7 @@ function InvoiceMainPage(props){
                     <Button type="primary" onClick={onFormOpen} style={{float: "right"}}>Create</Button>
                 </div>
 
-                <BillList invoiceList ={invoiceList}/>
+                <InvoiceTable invoiceList ={invoiceList}/>
             </div>
             
             {/* <Modal open={isOpen} onCancel={onFormClose} onClose={onFormClose}>
