@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Row, Col, Typography, ConfigProvider, Upload, Image, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Form, Input, Row, Col, Typography, ConfigProvider, Upload, Image, Button, Modal } from 'antd';
+import BillEdit from './BillEdit';
 
 const { Title } = Typography;
 
@@ -34,8 +34,14 @@ const BillDetail = ({ bill }) => {
   ]);
   const { Text } = Typography;
   const onCreateButton = () => {
-    setIsOpen(true)
-    }
+    setIsOpen(true);
+  };
+  const onModalClose = () => {
+    setIsOpen(false);
+  };
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
 
   return (
     <ConfigProvider
@@ -51,6 +57,16 @@ const BillDetail = ({ bill }) => {
         <div className="buttons" style={{ marginBottom: "15px" }}>
           <Button type="primary" onClick={onCreateButton} style={{ float: "right" }}>Edit</Button>
         </div>
+        <Modal
+          open={isOpen}
+          onCancel={handleCancel}
+          width={800}
+          bodyStyle={{ overflowY: 'auto' }}
+          footer={null}
+        >
+          <BillEdit />
+        </Modal>
+        
         <div style={{ clear: "both" }}></div>
 
           <Form.Item
