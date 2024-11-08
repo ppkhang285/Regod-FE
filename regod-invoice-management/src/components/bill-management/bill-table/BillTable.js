@@ -32,13 +32,13 @@ function BillTable(props){
         },
         {
           title: 'Bill Name',
-          dataIndex: 'total',
+          dataIndex: 'billName',
           key: 'billName',
         },
         {
             title: 'Total',
-            dataIndex: 'total',
-            key: 'total'
+            dataIndex: 'totalCost',
+            key: 'totalCost'
         },
         {
             title: 'Due Date',
@@ -50,9 +50,9 @@ function BillTable(props){
             dataIndex: 'status',
             key: 'status',
             render: (_, record) =>{
-                if (record.status == 0) return (<p style={{color: "blue"}}>PENDING</p>)
-                if (record.status == 1) return (<p style={{color: "green"}}>PAID</p>)
-                if (record.status == 2) return (<p style={{color: "red"}}>OVERDUE</p>)
+                if (record.status == "pending") return (<p style={{color: "blue"}}>PENDING</p>)
+                if (record.status == 'paid') return (<p style={{color: "green"}}>PAID</p>)
+                if (record.status == 'overdue') return (<p style={{color: "red"}}>OVERDUE</p>)
             }
         },
         {

@@ -8,19 +8,19 @@ function BillMainPage(props){
     const [isOpen, setIsOpen] = useState(false)
     const [bills, setBills] = useState([]);
     // Get data for Table
-    let billList =[
-        {id: 1, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 0},
-        {id: 2, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 1},
-        {id: 3, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 2}
-    ];
+    // let billList =[
+    //     {id: 1, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 0},
+    //     {id: 2, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 1},
+    //     {id: 3, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 2}
+    // ];
 
     
   // Get Data from API
     useEffect(() => {
-        axios.get('http://192.168.243.182:8080/bills')
+        axios.get('http://localhost:8080/bills')
         .then(response => {
-        
             setBills(response.data);
+            //console.log(bills)
             
         })
         .catch(error => {
@@ -28,8 +28,8 @@ function BillMainPage(props){
             console.error(error);
         });
     }, []);
-   //let billList = props.billList;
-    console.log(billList)
+    let billList = bills.data
+  
 
     const onFormOpen = () =>{
         
