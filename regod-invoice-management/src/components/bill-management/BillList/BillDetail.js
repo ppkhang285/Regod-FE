@@ -48,8 +48,13 @@ const BillDetail = () => {
     setIsOpen(false);
   };
 
+  const handlePay = () =>{
+
+  }
+
   const getData = async () =>{
     const res = await axios.get(`http://192.168.146.182/api/bills/${billId}`);
+    setBill(res.data.data)
     setBillName(res.data.data.billName);
     setDepartmentName(res.data.data.departmentName)
     setDueDate(res.data.data.dueDate)
@@ -158,6 +163,7 @@ const BillDetail = () => {
           </Form.Item>
 
         </Form>
+        <Button type='primary' style={{float: "right"}} onClick={handlePay} >Pay</Button>
       </div>
     </ConfigProvider>
   );
