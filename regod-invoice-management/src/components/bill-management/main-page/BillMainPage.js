@@ -52,7 +52,7 @@ function BillMainPage(props){
                 <BillTable billList ={billList}/>
             </div>
             
-            <Modal open={isOpen} onCancel={onFormClose} onClose={onFormClose}>
+            <Modal open={isOpen} footer={null} onCancel={onFormClose} onClose={onFormClose}>
                 <CreateForm />
             </Modal>
         </div>

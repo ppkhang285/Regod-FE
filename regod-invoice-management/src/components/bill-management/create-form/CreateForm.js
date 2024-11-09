@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider, Upload } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-    
+
 
 const { Title } = Typography;
 
@@ -79,54 +79,59 @@ const CreateForm = () => {
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.List name="productList">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(({ key, name, fieldKey, ...restField }, index) => (
-                  <Row key={key} gutter={16}>
-                    <Col span={2}>
-                      <Form.Item>
-                        <span style={{ fontWeight: 'bold' }}>{index + 1}</span>
-                      </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                      <Form.Item
-                        {...restField}
-                        name={[name, 'productname']}
-                        fieldKey={[fieldKey, 'productname']}
-                        label={<span style={{ fontWeight: 'bold' }}>Product Name</span>}
-                        rules={[{ required: true, message: 'Please input the product name!' }]}
-                      >
-                        <Input placeholder="Product Name" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={4}>
-                      <Form.Item
-                        {...restField}
-                        name={[name, 'count']}
-                        fieldKey={[fieldKey, 'count']}
-                        label={<span style={{ fontWeight: 'bold' }}>Count</span>}
-                        rules={[{ required: true, message: 'Please input the count!' }]}
-                      >
-                        <Input placeholder="Count" min={0} type="number" onChange={calculateTotal} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                      <Form.Item
-                        {...restField}
-                        name={[name, 'price']}
-                        fieldKey={[fieldKey, 'price']}
-                        label={<span style={{ fontWeight: 'bold' }}>Price</span>}
-                        rules={[{ required: true, message: 'Please input the price!' }]}
-                      >
-                        <Input placeholder="Price" type="number" min={0} onChange={calculateTotal} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={4}>
-                      <MinusCircleOutlined onClick={() => { remove(name); calculateTotal(); }} style={{ color: '#ff4d4f', fontSize: '20px', marginTop: '40px' }} />
-                    </Col>
-                  </Row>
-                ))}
+          <Title level={5}>Product List</Title>
+                    <Row gutter={16} style={{ fontWeight: 'bold', marginBottom: '10px' }}>
+                      <Col span={2}>No.</Col>
+                      <Col span={6}>Product Name</Col>
+                      <Col span={4}>Count</Col>
+                      <Col span={6}>Price</Col>
+                      <Col span={4}>Action</Col>
+                    </Row>
+                    <Form.List name="productList">
+                      {(fields, { add, remove }) => (
+                        <>
+                          {fields.map(({ key, name, fieldKey, ...restField }, index) => (
+                            <Row key={key} gutter={16}>
+                              <Col span={2}>
+                                <Form.Item>
+                                  <span style={{ fontWeight: 'bold' }}>{index + 1}</span>
+                                </Form.Item>
+                              </Col>
+                              <Col span={6}>
+                                <Form.Item
+                                  {...restField}
+                                  name={[name, 'productname']}
+                                  fieldKey={[fieldKey, 'productname']}
+                                  rules={[{ required: true, message: 'Please input the product name!' }]}
+                                >
+                                  <Input placeholder="Product Name" />
+                                </Form.Item>
+                              </Col>
+                              <Col span={4}>
+                                <Form.Item
+                                  {...restField}
+                                  name={[name, 'count']}
+                                  fieldKey={[fieldKey, 'count']}
+                                  rules={[{ required: true, message: 'Please input the count!' }]}
+                                >
+                                  <Input placeholder="Count" type="number" min={0} onChange={calculateTotal} />
+                                </Form.Item>
+                              </Col>
+                              <Col span={6}>
+                                <Form.Item
+                                  {...restField}
+                                  name={[name, 'price']}
+                                  fieldKey={[fieldKey, 'price']}
+                                  rules={[{ required: true, message: 'Please input the price!' }]}
+                                >
+                                  <Input placeholder="Price" type="number" min={0} onChange={calculateTotal} />
+                                </Form.Item>
+                              </Col>
+                              <Col span={4}>
+                                <MinusCircleOutlined onClick={() => { remove(name); calculateTotal(); }} style={{ color: '#ff4d4f', fontSize: '20px', marginTop: '10px' }} />
+                              </Col>
+                            </Row>
+                          ))}
                 <Form.Item>
                   <Button
                     type="dashed"

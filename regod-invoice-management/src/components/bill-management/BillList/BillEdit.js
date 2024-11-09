@@ -42,7 +42,6 @@ const EditBill = () => {
     console.log('File list:', fileList);
   };
 
-
   const onCancel = () => {
     console.log('Form cancelled');
   };
@@ -58,7 +57,7 @@ const EditBill = () => {
   };
 
   useEffect(() => {
-    form.setFieldsValue({ productList,billId,billName,departmentName,duedate: moment(duedate) });
+    form.setFieldsValue({ productList, billId, billName, departmentName, duedate: moment(duedate) });
     calculateTotal();
   }, [form]);
 
@@ -70,7 +69,7 @@ const EditBill = () => {
         },
       }}
     >
-      <div style={{ maxWidth: '800px', maxHeight: '1059px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', height: 'auto' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px' }}>
         <Title level={1} style={{ textAlign: 'center', color: '#1677FF' }}>Edit Bill!</Title>
         <Form form={form} name="create_form" onFinish={onFinish} autoComplete="off" layout="vertical" requiredMark={false}>
           <Form.Item
@@ -78,7 +77,7 @@ const EditBill = () => {
             label={<span style={{ fontWeight: 'bold' }}>Bill ID</span>}
             rules={[{ required: true, message: 'Please input the bill id!' }]}
           >
-            <Input readonly style={{ backgroundColor: '#f0f0f0', color: '#000' }}/>
+            <Input readOnly style={{ backgroundColor: '#f0f0f0', color: '#000' }} />
           </Form.Item>
 
           <Form.Item
@@ -105,6 +104,14 @@ const EditBill = () => {
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
 
+          <Title level={5}>Product List</Title>
+          <Row gutter={16} style={{ fontWeight: 'bold', marginBottom: '10px' }}>
+            <Col span={2}>No.</Col>
+            <Col span={6}>Product Name</Col>
+            <Col span={4}>Count</Col>
+            <Col span={6}>Price</Col>
+            <Col span={4}>Action</Col>
+          </Row>
           <Form.List name="productList">
             {(fields, { add, remove }) => (
               <>
@@ -120,7 +127,6 @@ const EditBill = () => {
                         {...restField}
                         name={[name, 'productname']}
                         fieldKey={[fieldKey, 'productname']}
-                        label={<span style={{ fontWeight: 'bold' }}>Product Name</span>}
                         rules={[{ required: true, message: 'Please input the product name!' }]}
                       >
                         <Input placeholder="Product Name" />
@@ -131,7 +137,6 @@ const EditBill = () => {
                         {...restField}
                         name={[name, 'count']}
                         fieldKey={[fieldKey, 'count']}
-                        label={<span style={{ fontWeight: 'bold' }}>Count</span>}
                         rules={[{ required: true, message: 'Please input the count!' }]}
                       >
                         <Input placeholder="Count" type="number" min={0} onChange={calculateTotal} />
@@ -142,14 +147,13 @@ const EditBill = () => {
                         {...restField}
                         name={[name, 'price']}
                         fieldKey={[fieldKey, 'price']}
-                        label={<span style={{ fontWeight: 'bold' }}>Price</span>}
                         rules={[{ required: true, message: 'Please input the price!' }]}
                       >
                         <Input placeholder="Price" type="number" min={0} onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={4}>
-                      <MinusCircleOutlined onClick={() => { remove(name); calculateTotal(); }} style={{ color: '#ff4d4f', fontSize: '20px', marginTop: '40px' }} />
+                      <MinusCircleOutlined onClick={() => { remove(name); calculateTotal(); }} style={{ color: '#ff4d4f', fontSize: '20px', marginTop: '10px' }} />
                     </Col>
                   </Row>
                 ))}
@@ -169,7 +173,7 @@ const EditBill = () => {
           </Form.List>
 
           <Form.Item label={<span style={{ fontWeight: 'bold' }}>Total</span>}>
-            <Input value={total} readOnly style={{ backgroundColor: '#f0f0f0', color: '#000' }}/>
+            <Input value={total} readOnly style={{ backgroundColor: '#f0f0f0', color: '#000' }} />
           </Form.Item>
 
           <Form.Item label="Upload Image">
