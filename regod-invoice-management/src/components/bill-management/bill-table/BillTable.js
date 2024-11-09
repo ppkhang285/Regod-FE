@@ -58,9 +58,9 @@ function BillTable(props){
             dataIndex: 'status',
             key: 'status',
             render: (_, record) =>{
-                if (record.status == "pending") return (<p style={{color: "blue"}}>PENDING</p>)
-                if (record.status == 'paid') return (<p style={{color: "green"}}>PAID</p>)
-                if (record.status == 'overdue') return (<p style={{color: "red"}}>OVERDUE</p>)
+                if (record.status == "Pending") return (<p style={{color: "blue"}}>PENDING</p>)
+                if (record.status == 'Paid') return (<p style={{color: "green"}}>PAID</p>)
+                if (record.status == 'Overdue') return (<p style={{color: "red"}}>OVERDUE</p>)
             }
         },
         {

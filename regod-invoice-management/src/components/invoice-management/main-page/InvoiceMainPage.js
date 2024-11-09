@@ -17,7 +17,7 @@ function InvoiceMainPage(props){
     ];
     
     const getData = () => {
-        axios.get('http://192.168.146.182/api/invoices')
+        axios.get('http://172.20.10.2:8090/invoices')
             .then(response => {
                 setInvoices(response.data);
             })

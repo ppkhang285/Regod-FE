@@ -29,18 +29,18 @@ const EditInvoice = () => {
   const [status, setStatus] = useState('Pending');
   const [billImages, setBillImages] = useState([
     {
-      url: 'https://als.com.vn/api/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
+      url: 'https://als.com.vn/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
     },
     {
-      url: 'https://als.com.vn/api/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
+      url: 'https://als.com.vn/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
     },
   ]);
   const [invoiceImages, setInvoiceImages] = useState([
     {
-      url: 'https://als.com.vn/api/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
+      url: 'https://als.com.vn/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
     },
     {
-      url: 'https://als.com.vn/api/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
+      url: 'https://als.com.vn/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
     },
   ]);
   const [billIdList, setBillIdList] = useState(['#606160', '#626160', '#619163', '#646163', '#662645']);

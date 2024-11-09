@@ -16,7 +16,7 @@ function BillMainPage(props){
     
   // Get Data from API
     const getData = () => {
-        axios.get('http://192.168.146.182/api/bills')
+        axios.get('http://172.20.10.2:8090/bills')
             .then(response => {
                 setBills(response.data);
             })
@@ -27,7 +27,7 @@ function BillMainPage(props){
 
     const postData = (data) =>{
     
-        axios.post('http://192.168.146.182/api/bills', data)
+        axios.post('http://172.20.10.2:8090/bills', data)
         .then(response => {
             if (response.data.code === 200){
                 getData()
@@ -54,7 +54,7 @@ function BillMainPage(props){
     }
 
     const handleDelete = (id) =>{
-        axios.delete(`http://192.168.146.182/api/bills/${id}`)
+        axios.delete(`http://172.20.10.2:8090/bills/${id}`)
         .then(response => {
             console.log('Data deleted successfully:', response.data);
             if (response.data.code === 200){
