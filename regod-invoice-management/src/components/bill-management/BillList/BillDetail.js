@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Row, Col, Typography, ConfigProvider, Upload, Image, Button, Modal } from 'antd';
 import BillEdit from './BillEdit';
-
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 const { Title } = Typography;
 
-const BillDetail = ({ bill }) => {
+const BillDetail = () => {
+
+  
+  const {billId} = useParams()
+
+  const [bill, setBill] = useState(null)
   const [isOpen, setIsOpen] = useState(false)
   const [total, setTotal] = useState(160);
-  const [billId, setBillId] = useState('#031124');
   const [billName, setBillName] = useState('Bill 1');
   const [departmentName, setDepartmentName] = useState('Department 1');
   const [dueDate, setDueDate] = useState('2024-12-20');
@@ -43,6 +48,19 @@ const BillDetail = ({ bill }) => {
     setIsOpen(false);
   };
 
+  const getData = async () =>{
+    const res = await axios.get(`http://192.168.146.182/api/bills/${billId}`);
+    setBillName(res.data.data.billName);
+    setDepartmentName(res.data.data.departmentName)
+    setDueDate(res.data.data.dueDate)
+    setStatus(res.data.data.status)
+    setTotal(res.data.data.totalCost)
+
+  }
+
+  useEffect(() => {getData()}, []);
+ 
+
   return (
     <ConfigProvider
       theme={{
@@ -61,7 +79,6 @@ const BillDetail = ({ bill }) => {
           open={isOpen}
           onCancel={handleCancel}
           width={800}
-          bodyStyle={{ overflowY: 'auto' }}
           footer={null}
         >
           <BillEdit />

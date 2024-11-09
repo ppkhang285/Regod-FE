@@ -2,42 +2,106 @@ import { useState, useEffect } from "react";
 import BillTable from "../bill-table/BillTable"
 import { Button, Modal } from "antd";
 import CreateForm from "../create-form/CreateForm";
+import BillEdit from '../BillList/BillEdit'
 import axios from 'axios';
 function BillMainPage(props){
 
-    const [isOpen, setIsOpen] = useState(false)
-    const [bills, setBills] = useState([]);
-    // Get data for Table
-    // let billList =[
-    //     {id: 1, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 0},
-    //     {id: 2, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 1},
-    //     {id: 3, departmentName :"Department Name", billName: "Bill Name", total: 200000, dueDate :"03/11/2024", status: 2}
-    // ];
+    const [isCreateOpen, setIsCreateOpen] = useState(false)
+    const [isEditOpen, setIsEditOpen] = useState(false)
+    const [isDetailOpen, setIsDetailOpen] = useState(false)
 
+    const [detailBill, setDetailBill] = useState(null)
+    const [bills, setBills] = useState([]);
+    
     
   // Get Data from API
-    useEffect(() => {
-        axios.get('http://localhost:8080/bills')
+    const getData = () => {
+        axios.get('http://192.168.146.182/api/bills')
+            .then(response => {
+                setBills(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        };
+
+    const postData = (data) =>{
+    
+        axios.post('http://192.168.146.182/api/bills', data)
         .then(response => {
-            setBills(response.data);
-            //console.log(bills)
-            
+            if (response.data.code === 200){
+                getData()
+            }
         })
         .catch(error => {
-          
-            console.error(error);
+            console.error('Error posting data:', error);
         });
+    }
+
+    
+
+    useEffect(() => {
+        getData();
     }, []);
-    let billList = bills.data
-  
 
     const onFormOpen = () =>{
         
-        setIsOpen(true)
+        setIsCreateOpen(true)
     }
 
     const onFormClose = () =>{
-        setIsOpen(false)
+        setIsCreateOpen(false)
+    }
+
+    const handleDelete = (id) =>{
+        axios.delete(`http://192.168.146.182/api/bills/${id}`)
+        .then(response => {
+            console.log('Data deleted successfully:', response.data);
+            if (response.data.code === 200){
+                getData()
+            }
+            
+        })
+        .catch(error => {
+            console.error('Error deleting data:', error);
+        });
+    }
+
+    const handleEdit = (id) =>{
+        console.log(id)
+
+    }
+
+
+    const handleDetail = (id) =>{
+       // console.log("Open edit ", id)
+        setIsDetailOpen(true)
+    }
+    
+
+
+    const onFormSubmit = (values) =>{
+        const formattedData = {
+            billName: values.billname, 
+            departmentName: values.departmentName,
+            createDate: new Date().toISOString(), 
+            dueDate: values.duedate.format('YYYY-MM-DD'), 
+            status: 'pending', 
+            supplierBillID: values.billId,
+            imgURl: values.imgURl || '', 
+            totalCost: values.totalCost || 0,
+            deposited: values.deposited || 0,
+            payLeft: values.payLeft || 0,
+            products: values.productList.map(product => ({
+                name: product.productname,
+                price: parseFloat(product.price), 
+                quantity: parseInt(product.count, 10), 
+                total: parseFloat(product.count * product.price), 
+            }))
+        };
+        postData(formattedData)
+        setIsCreateOpen(false)
+      
     }
     
     return(
@@ -49,12 +113,14 @@ function BillMainPage(props){
                     <Button type="primary" onClick={onFormOpen} style={{float: "right"}}>Create</Button>
                 </div>
 
-                <BillTable billList ={billList}/>
+                <BillTable billList ={bills.data} handleDetail={handleDetail} handleDelete={handleDelete}/>
             </div>
             
-            <Modal open={isOpen} onCancel={onFormClose} onClose={onFormClose}>
-                <CreateForm />
+            <Modal open={isCreateOpen}  footer={null}>
+                <CreateForm  onCancel={onFormClose} onClose={onFormClose} onSubmit={onFormSubmit} />
             </Modal>
+
+     
         </div>
         
         
