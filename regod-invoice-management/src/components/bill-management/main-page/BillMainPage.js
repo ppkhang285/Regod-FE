@@ -92,7 +92,7 @@ function BillMainPage(props){
             totalCost: values.totalCost || 0,
             deposited: values.deposited || 0,
             payLeft: values.payLeft || 0,
-            products: values.productList.map(product => ({
+            listProducts: values.productList.map(product => ({
                 name: product.productname,
                 price: parseFloat(product.price), 
                 quantity: parseInt(product.count, 10), 
