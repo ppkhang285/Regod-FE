@@ -52,7 +52,7 @@ const CreateForm = () => {
             label={<span style={{ fontWeight: 'bold' }}>Bill Id</span>}
             rules={[{ required: true, message: 'Please input the bill id!' }]}
           >
-            <Input />
+            <Input readOnly style={{ backgroundColor: '#f0f0f0', color: '#000' }}/>
           </Form.Item>
 
           <Form.Item
@@ -143,7 +143,7 @@ const CreateForm = () => {
           </Form.List>
 
           <Form.Item label={<span style={{ fontWeight: 'bold' }}>Total</span>}>
-            <Input value={total} readOnly />
+            <Input value={total} readOnly style={{ backgroundColor: '#f0f0f0', color: '#000' }}/>
           </Form.Item>
 
           <Form.Item label="Upload Image">
@@ -158,7 +158,7 @@ const CreateForm = () => {
             </Upload>
           </Form.Item>
 
-          {/* <Form.Item>
+          { <Form.Item>
             <Row justify="end" gutter={16}>
               <Col>
                 <Button size="large" onClick={onCancel} style={{ backgroundColor: '#ffffff', color: '#1677FF', borderColor: '#1677FF' }}>
@@ -171,7 +171,7 @@ const CreateForm = () => {
                 </Button>
               </Col>
             </Row>
-          </Form.Item> */}
+          </Form.Item> }
         </Form>
       </div>
     </ConfigProvider>

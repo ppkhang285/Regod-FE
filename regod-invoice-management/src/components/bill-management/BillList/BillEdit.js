@@ -78,7 +78,7 @@ const EditBill = () => {
             label={<span style={{ fontWeight: 'bold' }}>Bill ID</span>}
             rules={[{ required: true, message: 'Please input the bill id!' }]}
           >
-            <Input />
+            <Input readonly style={{ backgroundColor: '#f0f0f0', color: '#000' }}/>
           </Form.Item>
 
           <Form.Item
