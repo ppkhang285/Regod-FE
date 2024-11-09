@@ -134,7 +134,7 @@ const EditBill = () => {
                         label={<span style={{ fontWeight: 'bold' }}>Count</span>}
                         rules={[{ required: true, message: 'Please input the count!' }]}
                       >
-                        <Input placeholder="Count" type="number" onChange={calculateTotal} />
+                        <Input placeholder="Count" type="number" min={0} onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={6}>
@@ -145,7 +145,7 @@ const EditBill = () => {
                         label={<span style={{ fontWeight: 'bold' }}>Price</span>}
                         rules={[{ required: true, message: 'Please input the price!' }]}
                       >
-                        <Input placeholder="Price" type="number" onChange={calculateTotal} />
+                        <Input placeholder="Price" type="number" min={0} onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={4}>
@@ -169,7 +169,7 @@ const EditBill = () => {
           </Form.List>
 
           <Form.Item label={<span style={{ fontWeight: 'bold' }}>Total</span>}>
-            <Input value={total} readOnly />
+            <Input value={total} readOnly style={{ backgroundColor: '#f0f0f0', color: '#000' }}/>
           </Form.Item>
 
           <Form.Item label="Upload Image">

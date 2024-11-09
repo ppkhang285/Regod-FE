@@ -108,7 +108,7 @@ const CreateForm = () => {
                         label={<span style={{ fontWeight: 'bold' }}>Count</span>}
                         rules={[{ required: true, message: 'Please input the count!' }]}
                       >
-                        <Input placeholder="Count" type="number" onChange={calculateTotal} />
+                        <Input placeholder="Count" min={0} type="number" onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={6}>
@@ -119,7 +119,7 @@ const CreateForm = () => {
                         label={<span style={{ fontWeight: 'bold' }}>Price</span>}
                         rules={[{ required: true, message: 'Please input the price!' }]}
                       >
-                        <Input placeholder="Price" type="number" onChange={calculateTotal} />
+                        <Input placeholder="Price" type="number" min={0} onChange={calculateTotal} />
                       </Form.Item>
                     </Col>
                     <Col span={4}>
