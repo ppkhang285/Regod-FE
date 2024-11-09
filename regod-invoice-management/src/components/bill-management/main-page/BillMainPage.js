@@ -116,8 +116,8 @@ function BillMainPage(props){
                 <BillTable billList ={bills.data} handleDetail={handleDetail} handleDelete={handleDelete}/>
             </div>
             
-            <Modal open={isCreateOpen}  footer={null}>
-                <CreateForm  onCancel={onFormClose} onClose={onFormClose} onSubmit={onFormSubmit} />
+            <Modal open={isCreateOpen}  footer={null} onClose={onFormClose}  width= {800}>
+                <CreateForm  onCancel={onFormClose} onClose={onFormClose} onSubmit={onFormSubmit}/>
             </Modal>
 
      

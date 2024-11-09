@@ -45,7 +45,8 @@ function BillTable(props){
         {
             title: 'Total',
             dataIndex: 'totalCost',
-            key: 'totalCost'
+            key: 'totalCost',
+            render: (_, record) => <> {record.totalCost} VND </>
         },
         {
             title: 'Due Date',

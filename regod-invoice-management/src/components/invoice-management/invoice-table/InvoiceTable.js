@@ -21,16 +21,12 @@ function InvoiceTable(props){
           title: 'No',
           dataIndex: 'id',
           key: 'id',
+          render: (id, record, index) => { ++index; return index; },
         },
         {
-          title: 'Invoice ID',
-          dataIndex: 'invoiceID',
-          key: 'invoiceID',
-        },
-        {
-          title: 'Bill ID',
-          dataIndex: 'billID',
-          key: 'billID',
+          title: 'Bill   ID',
+          dataIndex: 'supplierBillID',
+          key: 'supplierBillID',
         },
         {
             title: 'Bill name',
@@ -39,9 +35,9 @@ function InvoiceTable(props){
         },
         {
             title: 'Total',
-            dataIndex: 'total',
-            key: 'total',
-            render: (_, record) => <> {record.total} VND </>
+            dataIndex: 'totalCost',
+            key: 'totalCost',
+            render: (_, record) => <> {record.totalCost} VND </>
         },
         {
             title: 'Paid date',
