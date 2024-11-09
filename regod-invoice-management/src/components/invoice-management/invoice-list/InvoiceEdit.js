@@ -1,9 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider, Upload,Image, Select} from 'antd';
+import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider, Upload,Image, Select, Table} from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 const { Title } = Typography;
+
+ const columns = [
+    {
+      title: 'No.',
+      dataIndex: 'no',
+      key: 'no',
+      render: (text, record, index) => index + 1, // Adds a row number starting from 1
+    },
+    {
+      title: 'Product Name',
+      dataIndex: 'productname',
+      key: 'productname',
+    },
+    {
+      title: 'Count',
+      dataIndex: 'count',
+      key: 'count',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+    },
+  ];
 
 const EditInvoice = () => {
   const [billId, setBillId] = useState('#031124');
@@ -15,17 +39,20 @@ const EditInvoice = () => {
   const [deposit, setDeposit] = useState(200000);
   const {Option} = Select;
   const [productList, setProductList] = useState([
-    {
-      productname: 'Product 1',
-      count: 2,
-      price: 500000,
-    },
-    {
-      productname: 'Product 2',
-      count: 3,
-      price: 200000,
-    },
-  ]);
+      {
+        key: '1',
+        productname: 'Product 1',
+        count: 2,
+        price: 50,
+      },
+      {
+        key: '2',
+        productname: 'Product 2',
+        count: 3,
+        price: 20,
+      },
+    ]);
+
   const [status, setStatus] = useState('Pending');
   const [billImages, setBillImages] = useState([
     {
@@ -134,36 +161,14 @@ const EditInvoice = () => {
             <Input value={status} readOnly style={{ backgroundColor: '#f0f0f0' }} />
           </Form.Item>
 
-          {productList.map((product, index) => (
-            <Row key={index} gutter={16}>
-              <Col span={2}>
-                <Form.Item>
-                  <span style={{ fontWeight: 'bold' }}>{index + 1}</span>
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item
-                  label={<span style={{ fontWeight: 'bold' }}>Product Name</span>}
-                >
-                  <Input value={product.productname} readOnly />
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item
-                  label={<span style={{ fontWeight: 'bold' }}>Count</span>}
-                >
-                  <Input value={product.count} readOnly />
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item
-                  label={<span style={{ fontWeight: 'bold' }}>Price</span>}
-                >
-                  <Input value={product.price} readOnly />
-                </Form.Item>
-              </Col>
-            </Row>
-          ))}
+          <Form.Item label={<span style={{ fontWeight: 'bold' }}>Product List</span>}>
+                      <Table
+                        dataSource={productList}
+                        columns={columns}
+                        pagination={false}
+                        bordered
+                      />
+                    </Form.Item>
 
           <Form.Item
             label={<span style={{ fontWeight: 'bold' }}>Deposit</span>}>
