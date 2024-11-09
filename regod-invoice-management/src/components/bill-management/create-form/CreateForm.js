@@ -5,12 +5,14 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
-const CreateForm = () => {
+const CreateForm = (props) => {
   const [form] = Form.useForm();
   const [total, setTotal] = useState(0);
 
   const onFinish = (values) => {
-    console.log('Received values of form:', values);
+
+    props.onSubmit(values)
+    
   };
 
   const onUploadChange = ({ fileList }) => {
@@ -20,6 +22,8 @@ const CreateForm = () => {
 
   const onCancel = () => {
     console.log('Form cancelled');
+    props.onCancel()
+    
   };
 
   const calculateTotal = () => {
@@ -158,7 +162,7 @@ const CreateForm = () => {
             </Upload>
           </Form.Item>
 
-          {/* <Form.Item>
+          <Form.Item>
             <Row justify="end" gutter={16}>
               <Col>
                 <Button size="large" onClick={onCancel} style={{ backgroundColor: '#ffffff', color: '#1677FF', borderColor: '#1677FF' }}>
@@ -171,7 +175,7 @@ const CreateForm = () => {
                 </Button>
               </Col>
             </Row>
-          </Form.Item> */}
+          </Form.Item>
         </Form>
       </div>
     </ConfigProvider>

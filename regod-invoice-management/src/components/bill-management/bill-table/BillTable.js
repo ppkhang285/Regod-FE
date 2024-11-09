@@ -13,6 +13,7 @@ function BillTable(props){
 
     const handleEdit = (id) =>{
         console.log(id)
+
     }
 
     const handleDetail = (id) =>{
@@ -24,6 +25,12 @@ function BillTable(props){
           title: 'No',
           dataIndex: 'id',
           key: 'id',
+          render: (id, record, index) => { ++index; return index; },
+        },
+        {
+            title: 'ID',
+            dataIndex: 'supplierBillID',
+            key: 'supplierBillID',
         },
         {
           title: 'Department Name',
@@ -62,8 +69,8 @@ function BillTable(props){
             render: (_, record) => <> 
                 <ActionButtons 
                     id = {record.id} 
-                    handleDelete ={handleDelete}
-                    handleDetail = {handleDetail}
+                    handleDelete ={props.handleDelete}
+                    handleDetail = {props.handleDetail}
                     handleEdit = {handleEdit}
 
                 />
@@ -73,7 +80,7 @@ function BillTable(props){
       
       
     return(
-        <Table dataSource={billList} columns={columns} pagination={false}/>
+        <Table dataSource={billList} columns={columns} pagination={false} key={billList}/>
 
     );
 
