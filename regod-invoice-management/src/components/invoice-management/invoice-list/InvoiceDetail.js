@@ -93,7 +93,7 @@ const InvoiceDetail = ({ bill }) => {
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontWeight: 'bold' }}>Invoice Name</span>}
+            label={<span style={{ fontWeight: 'bold' }}>Bill Name</span>}
           >
             <Input value={billName} readOnly />
           </Form.Item>
@@ -180,6 +180,7 @@ const InvoiceDetail = ({ bill }) => {
               </Form.Item>
             </Col>
           </Row>
+
           
         </Form>
       </div>

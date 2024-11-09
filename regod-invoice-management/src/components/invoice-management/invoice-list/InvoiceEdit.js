@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider, Upload,Image } from 'antd';
+import { Form, Input, Button, DatePicker, Row, Col, Typography, ConfigProvider, Upload,Image, Select} from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -13,6 +13,7 @@ const EditInvoice = () => {
   const [dueDate, setDueDate] = useState('2024-12-20');
   const [paidDate, setPaidDate] = useState('2024-3-20');
   const [deposit, setDeposit] = useState(200000);
+  const {Option} = Select;
   const [productList, setProductList] = useState([
     {
       productname: 'Product 1',
@@ -42,12 +43,18 @@ const EditInvoice = () => {
       url: 'https://als.com.vn/api/file-management/file-descriptor/view/67843121-2b1d-6f72-eae6-3a0038844086',
     },
   ]);
+  const [billIdList, setBillIdList] = useState(['1', '2', '3', '4', '5']);
   const { Text } = Typography;
   const [form] = Form.useForm();
   const [total, setTotal] = useState(0);
 
   const onFinish = (values) => {
-    console.log('Received values of form:', values);
+    const formData = {
+      ...values,
+      invoiceImages,
+    };
+    console.log('Form Data:', formData);
+    // Xử lý dữ liệu form ở đây
   };
 
   const onUploadChange = ({ fileList }) => {
@@ -84,41 +91,47 @@ const EditInvoice = () => {
     >
       <div style={{ maxWidth: '800px', maxHeight: '1059px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', height: 'auto' }}>
         <Title level={1} style={{ textAlign: 'center', color: '#1677FF' }}>Edit Invoice!</Title>
-        <Form form={form} name="create_form" onFinish={onFinish} autoComplete="off" layout="vertical" requiredMark={false}>
+        <Form form={form} name="edit_invoice" onFinish={onFinish} autoComplete="off" layout="vertical" requiredMark={false}>
             <Form.Item
             label={<span style={{ fontWeight: 'bold' }}>Invoice ID</span>}
           >
-            <Input value={invoiceId} readOnly />
+            <Input value={invoiceId} readOnly style={{ backgroundColor: '#f0f0f0' }} />
           </Form.Item>
           <Form.Item
             name="billId"
             label={<span style={{ fontWeight: 'bold' }}>Bill ID</span>}
-            rules={[{ required: true, message: 'Please input the bill id!' }]}
+            rules={[{ required: true, message: 'Please select the bill id!' }]}
           >
-            <Input />
+            <Select placeholder="Select a bill ID">
+              {billIdList.map((billId) => (
+                <Option key={billId} value={billId}>
+                  {billId}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontWeight: 'bold' }}>Invoice Name</span>}
+            label={<span style={{ fontWeight: 'bold' }}>Bill Name</span>}
           >
-            <Input value={billName} readOnly />
+            <Input value={billName} readOnly style={{ backgroundColor: '#f0f0f0' }} />
           </Form.Item>
 
           <Form.Item
             label={<span style={{ fontWeight: 'bold' }}>Department Name</span>}
           >
-            <Input value={departmentName} readOnly />
+            <Input value={departmentName} readOnly style={{ backgroundColor: '#f0f0f0' }} />
           </Form.Item>
 
           <Form.Item
             label={<span style={{ fontWeight: 'bold' }}>Due Date</span>}
           >
-            <Input value={dueDate} readOnly />
+            <Input value={dueDate} readOnly style={{ backgroundColor: '#f0f0f0' }}/>
           </Form.Item>
           <Form.Item
             label={<span style={{ fontWeight: 'bold' }}>Status</span>}
           >
-            <Input value={status} readOnly />
+            <Input value={status} readOnly style={{ backgroundColor: '#f0f0f0' }} />
           </Form.Item>
 
           {productList.map((product, index) => (
@@ -171,7 +184,7 @@ const EditInvoice = () => {
           <Row gutter={6}>
             <Col span={12}>
               <Form.Item label={<span style={{ fontWeight: 'bold' }}>Bill Image</span>}>
-                <Image.PreviewGroup>
+                <Image.PreviewGroup style={{ backgroundColor: '#f0f0f0' }}>
                   {billImages.map((image, index) => (
                     <Image key={index} src={image.url} alt={`uploaded image ${index + 1}`} style={{ margin: '10px', width: '100px', height: '100px' }} />
                   ))}
@@ -193,6 +206,20 @@ const EditInvoice = () => {
           </Form.Item>
             </Col>
           </Row>
+          <Form.Item>
+            <Row justify="end" gutter={16}>
+              <Col>
+                <Button size="large" onClick={onCancel} style={{ backgroundColor: '#ffffff', color: '#1677FF', borderColor: '#1677FF' }}>
+                  Cancel
+                </Button>
+              </Col>
+              <Col>
+                <Button size="large" type="primary" htmlType="submit">
+                  Edit
+                </Button>
+              </Col>
+            </Row>
+          </Form.Item>
 
         </Form>
       </div>
